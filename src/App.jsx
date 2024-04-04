@@ -1,10 +1,19 @@
 import imageRickMorty from "./assets/img/rick-morty.png";
 import "./App.css";
 import Characters from "./components/Characters";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { checkToken } from "./validators/middleware";
 
 function App() {
   const [characters, setCharacters] = useState(null);
+
+  const navigate = useNavigate()
+  useEffect(() => {
+    if(!checkToken()){
+      navigate("/");
+   }
+  })
 
   const reqApi = async () => {
     const api = await fetch("https://rickandmortyapi.com/api/character");
