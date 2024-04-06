@@ -1,10 +1,22 @@
 import PropTypes from 'prop-types';
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { checkToken } from "../validators/middleware";
+
+
 export default function Characters(props) {
   const { characters, setCharacters } = props;
 
   const resetCharacters = () => {
     setCharacters(null);
   };
+
+  const navigate = useNavigate()
+  useEffect(() => {
+    if(!checkToken()){
+      navigate("/");
+   }
+  })
 
   Characters.propTypes = {
     characters: PropTypes.array.isRequired,
