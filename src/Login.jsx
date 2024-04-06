@@ -23,8 +23,7 @@ function Login() {
 
     function onSubmit()
     {
-        console.log(errors)
-        if(!passwordValidate(form.password) )
+        if(!passwordValidate(form.password))
         {
             setErrors(prevErrors => ({ ...prevErrors, ["password"]:  "Password invalid"}));
         }
