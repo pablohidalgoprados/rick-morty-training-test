@@ -6,4 +6,22 @@ function passwordValidate( password )
     return pattern.test(password);
 }
 
-export {passwordValidate};
+function isUser(username, password)
+{
+    const users = {
+        "rick": {
+            "password": "garrafon"
+        },
+        "morty":
+        {
+            "password": "jessica"
+        }
+    }
+    if (users[username] && users[username].password === password) {
+        return true
+    }
+    return false
+
+}
+
+export { passwordValidate, isUser };

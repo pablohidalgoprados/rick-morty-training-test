@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState } from "react";
-import { passwordValidate } from "./validators/user";
+import { passwordValidate, isUser } from "./validators/user";
 import { useNavigate } from "react-router-dom";
 import { setToken } from "./validators/tokenizer";
 
@@ -26,10 +26,16 @@ function Login() {
         ["password"]: "Password invalid",
       }));
     }
-    if (Object.values(errors).every((value) => value === undefined)) {
+    if (!isUser(form.username, form.password)) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        ["password"]: "User not found",
+      }));
+    } else if (Object.values(errors).every((value) => value === undefined)) {
       setToken(form.username);
       navigate("/app");
     }
+    return false;
   }
 
   return (
