@@ -11,6 +11,11 @@ function App() {
   const [error, setError] = useState(false);
   const [filters, setFilters] = useState({ name: "", status: "", species: "", type: "", gender: "" });
 
+useEffect( () => {
+  console.log(filters)
+  reqApi();
+}, [filters])
+
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
     setFilters((prevFilters) => ({
@@ -45,11 +50,6 @@ function App() {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    reqApi();
-  };
-
   return (
     <div className="App">
        <main className="m-10">
@@ -60,14 +60,14 @@ function App() {
         </title>
         {error ? (
           <>
-            <p className="text-red-500">No characters was found</p>
-            <FilterForm filters={filters} handleFilterChange={handleFilterChange} handleSubmit={handleSubmit} />
+            <p className="text-red-500">No characters were found</p>
+            <FilterForm filters={filters} handleFilterChange={handleFilterChange} />
             <Characters characters={characters} setCharacters={setCharacters}/>
           </>
           
         ) :characters ? (
           <>
-            <FilterForm filters={filters} handleFilterChange={handleFilterChange} handleSubmit={handleSubmit} />
+            <FilterForm filters={filters} handleFilterChange={handleFilterChange}  />
             <Characters characters={characters} setCharacters={setCharacters}/>
           </>
         ) : (
