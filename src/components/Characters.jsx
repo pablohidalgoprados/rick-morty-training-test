@@ -42,11 +42,16 @@ export default function Characters(props) {
                     <span className="status-icon alive inline-block w-3 h-3 rounded-full bg-green-500 mr-1" />
                     Alive
                   </>
-                ) : (
+                ) : character.status === "Dead" ? (
                   <>
                     <span className="status-icon dead inline-block w-3 h-3 rounded-full bg-red-500 mr-1" />
                     Dead
                   </>
+                ) : (
+                  <>
+                  <span className="status-icon unknown inline-block w-3 h-3 rounded-full bg-neutral-500 mr-1" />
+                  Unknown
+                </>
                 )}
               </h6>
               <p className="mt-2">
