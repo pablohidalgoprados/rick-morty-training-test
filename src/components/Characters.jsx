@@ -2,11 +2,11 @@ import PropTypes from "prop-types";
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { checkToken } from "../validators/middleware";
-import { removeItem } from "localforage";
 
-export default function Characters({ characters, setCharacters }) {
+export default function Characters({ characters }) {
   const [selectedCharacter, setSelectedCharacter] = useState(null);
   const detailsRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!checkToken()) {
@@ -14,22 +14,12 @@ export default function Characters({ characters, setCharacters }) {
     }
   }, []);
 
-  const resetCharacters = () => {
-    setCharacters(null);
-    setSelectedCharacter(null);
-  };
-
   const logout = () => {
-    removeItem("token");
+    localStorage.removeItem("token");
     navigate("/");
   };
 
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (!checkToken()) {
-      navigate("/");
-    }
-  });
+  
 
   Characters.propTypes = {
     characters: PropTypes.array.isRequired,

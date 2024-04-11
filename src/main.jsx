@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 import Login from './Login.jsx'
-import {checkToken} from "./validators/middleware.js"
 
 import {
   createBrowserRouter,
