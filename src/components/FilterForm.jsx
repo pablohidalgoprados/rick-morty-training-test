@@ -20,7 +20,7 @@ function CharacterFilter({ filters, handleFilterChange }) {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700">Specie:</label>
+          <label className="block text-gray-700">Species:</label>
           <input
             type="text"
             name="species"

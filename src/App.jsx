@@ -85,7 +85,7 @@ useEffect( () => {
               onClick={reqApi}
               className="rounded-xl bg-[#1ba94c] text-white shadow-[0_4px_12px_rgb(27_169_76_/_50%)] text-[18.005px] min-h-[2.778em] cursor-pointer px-[1.528em] py-0 border-[none] hover:bg-[#F0F8FF] hover:border hover:text-[#1ba94c] hover:border-solid hover:border-[#1ba94c]"
             >
-              Buscar personajes
+              Search characters
             </button>
           </div>
         </>
