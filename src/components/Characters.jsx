@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
-import { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { checkToken } from '../validators/middleware';
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { checkToken } from "../validators/middleware";
+import { removeItem } from 'localforage';
 
 export default function Characters({ characters, setCharacters }) {
   const [selectedCharacter, setSelectedCharacter] = useState(null);
-  const navigate = useNavigate();
   const detailsRef = useRef(null);
 
   useEffect(() => {
@@ -18,6 +18,18 @@ export default function Characters({ characters, setCharacters }) {
     setCharacters(null);
     setSelectedCharacter(null);
   };
+
+  const logout = () => {
+    removeItem("token")
+    navigate("/")
+  }
+
+  const navigate = useNavigate()
+  useEffect(() => {
+    if(!checkToken()){
+      navigate("/");
+   }
+  })
 
   Characters.propTypes = {
     characters: PropTypes.array.isRequired,
@@ -58,6 +70,9 @@ export default function Characters({ characters, setCharacters }) {
         className="mx-auto block rounded-xl bg-[#1ba94c] text-white shadow-[0_4px_12px_rgb(27_169_76_/_50%)] text-[18.005px] min-h-[2.778em] cursor-pointer px-[1.528em] py-0 border-[none] hover:bg-[#F0F8FF] hover:border hover:text-[#1ba94c] hover:border-solid hover:border-[#1ba94c] my-6"
       >
         Home
+      </button>
+      <button onClick={logout} className="mx-auto block rounded-xl bg-[#ca2020] text-white shadow-[0_4px_12px_rgb(220_20_60_/_50%)] text-[18.005px] min-h-[2.778em] cursor-pointer px-[1.528em] py-0 border-[none] hover:bg-[#F0F8FF] hover:border hover:text-[#ea4444] hover:border-solid hover:border-[#ea4444] my-6">
+        Sarte
       </button>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 justify-center">
         {characters.map((character, index) => (
@@ -136,6 +151,12 @@ export default function Characters({ characters, setCharacters }) {
           </div>
         ))}
       </div>
+      <button onClick={resetCharacters} className="mx-auto block rounded-xl bg-[#1ba94c] text-white shadow-[0_4px_12px_rgb(27_169_76_/_50%)] text-[18.005px] min-h-[2.778em] cursor-pointer px-[1.528em] py-0 border-[none] hover:bg-[#F0F8FF] hover:border hover:text-[#1ba94c] hover:border-solid hover:border-[#1ba94c] my-4">
+        Volver al inicio
+      </button>
+      <button onClick={logout} className="mx-auto block rounded-xl bg-[#ca2020] text-white shadow-[0_4px_12px_rgb(220_20_60_/_50%)] text-[18.005px] min-h-[2.778em] cursor-pointer px-[1.528em] py-0 border-[none] hover:bg-[#F0F8FF] hover:border hover:text-[#ea4444] hover:border-solid hover:border-[#ea4444] my-6">
+        Sarte
+      </button>
     </div>
   );
 }
